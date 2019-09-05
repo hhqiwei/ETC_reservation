@@ -13,8 +13,7 @@
 			});
 		</script>
 		<style>
-			
-			
+
 		</style>
 	</head>
 	<body>
@@ -29,14 +28,16 @@
 			</div>
 			<!-- 1.手机号码： -->
 			<div class="mui-input-row">
-				
+
 				<label>手机号码：</label>
 				<input type="text" class="mui-input-clear" placeholder="请输入手机号码" oncellchange="checkPhone()">
 			</div>
 			<!-- 2.所属城区： -->
 			<div class="mui-input-row">
 				<label>所属城区：</label>
-				<input type="text" class="mui-input-clear" placeholder="请输入城区">
+				<!-- <input type="text" class="mui-input-clear" placeholder="请输入城区"> -->
+				<h2 class="mui-center mui-title" id='addressResult'>请选择所属城区</h2>
+				<button id='showAddressPicker' class="mui-btn mui-btn-block" type='button'>选择城区</button>
 			</div>
 			<!-- 3.上门安装地址： -->
 			<div class="mui-input-row">
@@ -46,9 +47,10 @@
 			<!-- 4.希望上门日期： -->
 			<div class="mui-input-row">
 				<label>希望上门安装时间：</label>
-				<input type="text" class="mui-input-clear" placeholder="请选择时间">
-				<button type="button" id='demo7' data-options='{"type":"hour","customData":{"h":[{"text":"上午","value":"上午"},{"text":"下午","value":"下午"},{"text":"晚上","value":"晚上"}]},"labels":["年", "月", "日", "时段", "分"]}'
-				 class="btn mui-btn mui-btn-block">选择时段</button>
+				<!-- <input type="text" class="mui-input-clear" placeholder="请选择时间"> -->
+				<h2 class="mui-center mui-title" id='result'>请选择时间段</h2>
+					<button type="button" id='demo7' data-options='{"type":"hour","customData":{"h":[{"text":"上午","value":"上午"},{"text":"下午","value":"下午"},{"text":"晚上","value":"晚上"}]},"labels":["年", "月", "日", "时段", "分"]}'
+					 class="btn mui-btn mui-btn-block">选择时段</button>
 			</div>
 			<!-- 5.是否已有建行卡： -->
 			<div class="mui-input-row">
@@ -70,7 +72,6 @@
 			</div>
 			<div id='result' class="ui-alert"></div>
 		</form>
-	
 	</body>
 	<script type="text/javascript">
 		// 点击"提交"按钮
@@ -118,6 +119,7 @@
 		// 	})
 		// }
 	</script>
+	<!-- 时间选择器start -->
 	<script src="js/mui.min.js"></script>
 	<script src="js/mui.picker.min.js"></script>
 	<script>
@@ -130,7 +132,8 @@
 					var _self = this;
 					if (_self.picker) {
 						_self.picker.show(function(rs) {
-							result.innerText = '选择结果: ' + rs.text;
+							// result.innerText = '选择结果: ' + rs.text;
+							result.innerText = rs.text;
 							_self.picker.dispose();
 							_self.picker = null;
 						});
@@ -154,7 +157,8 @@
 							 * rs.h 时，用法同年
 							 * rs.i 分（minutes 的第二个字母），用法同年
 							 */
-							result.innerText = '选择结果: ' + rs.text;
+							// result.innerText = '选择结果: ' + rs.text;
+							result.innerText = rs.text;
 							/* 
 							 * 返回 false 可以阻止选择框的关闭
 							 * return false;
@@ -174,4 +178,57 @@
 			});
 		})(mui);
 	</script>
+	<!-- 时间选择器end -->
+	<!-- 选择城区start -->
+	<script>
+		(function($, doc) {
+			$.init();
+			$.ready(function() {
+				/**
+				 * 获取对象属性的值
+				 * 主要用于过滤三级联动中，可能出现的最低级的数据不存在的情况，实际开发中需要注意这一点；
+				 * @param {Object} obj 对象
+				 * @param {String} param 属性名
+				 */
+				var _getParam = function(obj, param) {
+					return obj[param] || '';
+				};
+				//普通示例
+				var addressPicker = new $.PopPicker();
+				addressPicker.setData([{
+					value: 'jiangnan',
+					text: '江南区'
+				}, {
+					value: 'liangqing',
+					text: '良庆区'
+				}, {
+					value: 'qingxiu',
+					text: '青秀区'
+				}, {
+					value: 'wuming',
+					text: '武鸣区'
+				}, {
+					value: 'xingning',
+					text: '兴宁区'
+				}, {
+					value: 'xixiangtang',
+					text: '西乡塘区'
+				}, {
+					value: 'yongning',
+					text: '邕宁区'
+				}]);
+				var showAddressPickerButton = doc.getElementById('showAddressPicker');
+				var addressResult = doc.getElementById('addressResult');
+				showAddressPickerButton.addEventListener('tap', function(event) {
+					addressPicker.show(function(items) {
+						// addressResult.innerText = JSON.stringify(items[0]);
+						addressResult.innerText=JSON.parse(JSON.stringify(items[0].text));
+						//返回 false 可以阻止选择框的关闭
+						//return false;
+					});
+				}, false);
+			});
+		})(mui, document);
+	</script>
+	<!-- 选择城区end -->
 </html>
