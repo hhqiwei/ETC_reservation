@@ -18,48 +18,17 @@
 			});
 		</script>
 		<style>
-			#label_address{
+			.h2css{
 				font-family: 'Helvetica Neue', Helvetica, sans-serif;
-				line-height: 1.1;
-				float: left;
-				width: 40%;
-				padding: 11px 15px
+				line-height: 1.7;
+				font-size:large;
+				font-weight:  lighter;
+				color:#000000;
 			}
-			#address{
-				float: right;
-				width: 60%;
-				margin-bottom: 0;
-				padding-left: 0;
-				border: 0
+			.mui-input-row{
+				text-align: justify;
 			}
-			#label_time{
-				font-family: 'Helvetica Neue', Helvetica, sans-serif;
-				line-height: 1.1;
-				float: left;
-				width: 60%;
-				padding: 11px 15px
-			}
-		#timeResult{
-			float: right;
-			width: 40%;
-			margin-bottom: 0;
-			padding-left:13em;
-			border: 0
-		}
-			#label_card{
-				font-family: 'Helvetica Neue', Helvetica, sans-serif;
-				line-height: 1.1;
-				float: left;
-				width: 60%;
-				padding: 11px 15px
-			}
-			#cardResult{
-				float: right;
-				width: 40%;
-				margin-bottom: 0;
-				padding-left:250px;
-				border: 0
-			}
+			.mui-input-row span{width:100%;display: inline-block;}
 		</style>
 	</head>
 	<body>
@@ -70,16 +39,16 @@
 			<form class="mui-input-group">
 				<!-- 1.手机号码： -->
 				<div class="mui-input-row">
-					<label>手机号码：</label>
+					<label>手机号码：<span></span></label>
 					<input type="number" pattern="\d*" class="mui-input-clear phone_input" id="phone" placeholder="请输入手机号码"
 					 oncellchange="checkPhone()">
 				</div>
 				<!-- 2.所属城区： -->
 				<div class="mui-input-row">
-					<label>所属城区：</label>
+					<label id="label_addressResult">所属城区：<span></span></label>
 					<!-- <input type="text" class="mui-input-clear" placeholder="请输入城区"> -->
 					<a id='showAddressPicker'>
-						<h2 class="mui-center mui-title addressResult_input" id='addressResult'>
+						<h2 class="h2css" id='addressResult'>
 							点击选择城区
 						</h2>
 					</a>
@@ -87,16 +56,16 @@
 				</div>
 				<!-- 3.上门安装地址： -->
 				<div class="mui-input-row">
-					<label id="label_address">上门安装地址：</label>
+					<label id="label_address">详细地址：<span></span></label>
 					<input type="text" class="mui-input-clear" id="address" placeholder="请输入地址">
 				</div>
 				<!-- 4.希望上门日期： -->
 				<div class="mui-input-row">
-					<label id="label_time">希望上门安装时间：</label>
+					<label id="label_time">上门时间：<span></span></label>
 					<!-- <input type="text" class="mui-input-clear" placeholder="请选择时间"> -->
 					<a id='demo7' data-options='{"type":"hour","customData":{"h":[{"text":"上午","value":"上午"},{"text":"下午","value":"下午"},{"text":"晚上","value":"晚上"}]},"labels":["年", "月", "日", "时段", "分"]}'
 					 class="btn">
-						<h2 class="mui-center mui-title" id='timeResult'>
+						<h2 class="h2css" id='timeResult'>
 							点击选择时间
 						</h2>
 					</a>
@@ -105,16 +74,14 @@
 				</div>
 				<!-- 5.是否已有建行卡： -->
 				<div class="mui-input-row">
-					<label id="label_card">是否已有建行卡：</label>
+					<label id="label_card">是否已有建行卡：<span></span></label>
 					<!-- <input href="#sheet1" type="text" class="mui-input-clear" placeholder="请选择"> -->
 					<a id='showCardPicker'>
-						<h2 class="mui-center mui-title" id='cardResult'>点击选择
+						<h2 class="h2css" id='cardResult'>点击选择
 						</h2>
 					</a>
 					<!-- <button id='showCardPicker' class="mui-btn mui-btn-block" type='button'>点击选择</button> -->
-
 				</div>
-
 				<!-- 6.备注：提交预约信息后，48小时内会有专属客户经理联系您确认上门安装事宜。 -->
 				<div class="mui-text-center">
 					备注：提交预约信息后，48小时内会有专属客户经理联系您确认上门安装事宜。
@@ -157,7 +124,6 @@
 		// 
 		// 		};
 
-		// 校验手机号
 		document.getElementById("sub").addEventListener('tap', function() {
 			var phone = $('#phone').val();
 			var addressResult = $('#addressResult')[0].innerText;
@@ -169,7 +135,7 @@
 			console.log(address);
 			console.log(timeResult);
 			console.log(cardResult);
-
+			// 校验手机号
 			var phone_pattern = /^1[3|4|5|7|8][0-9]{9}$/;
 			if (!phone_pattern.test(phone)) {
 				mui.alert('请输入正确的手机号', '系统提示', function() {
