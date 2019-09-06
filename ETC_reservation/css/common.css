@@ -1,8 +1,25 @@
-#body{
+#body {
 	background: #000000;
 }
 
 .contention {
-	position:relative;
-	margin:50px auto auto auto;
+	position: relative;
+	margin: 50px auto auto auto;
+}
+
+.h2css {
+	font-family: 'Helvetica Neue', Helvetica, sans-serif;
+	line-height: 1.7;
+	font-size: large;
+	font-weight: lighter;
+	color: #000000;
+}
+
+.mui-input-row {
+	text-align: justify;
+}
+
+.mui-input-row span {
+	width: 100%;
+	display: inline-block;
 }

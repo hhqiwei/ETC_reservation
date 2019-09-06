@@ -17,19 +17,6 @@
 				swipeBack: true, //启用右滑关闭功能
 			});
 		</script>
-		<style>
-			.h2css{
-				font-family: 'Helvetica Neue', Helvetica, sans-serif;
-				line-height: 1.7;
-				font-size:large;
-				font-weight:  lighter;
-				color:#000000;
-			}
-			.mui-input-row{
-				text-align: justify;
-			}
-			.mui-input-row span{width:100%;display: inline-block;}
-		</style>
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav">
@@ -74,7 +61,7 @@
 				</div>
 				<!-- 5.是否已有建行卡： -->
 				<div class="mui-input-row">
-					<label id="label_card">是否已有建行卡：<span></span></label>
+					<label id="label_card">持有建行卡：<span></span></label>
 					<!-- <input href="#sheet1" type="text" class="mui-input-clear" placeholder="请选择"> -->
 					<a id='showCardPicker'>
 						<h2 class="h2css" id='cardResult'>点击选择
@@ -149,18 +136,24 @@
 				});
 				return false;
 			} else {
-				alert("转到下一个页面");
-				mui.openWindow({
-					url: "success.html",
-					id: "success.html",
-					extras: {
-						phone: phone,
-						addressResult: addressResult,
-						address: address,
-						timeResult: timeResult,
-						cardResult: cardResult
-					} /*传递参数*/
+				// alert("转到下一个页面");
+				// mui.openWindow({
+				// 	url: "success.html",
+				// 	id: "success.html",
+				// 	extras: {
+				// 		phone: phone,
+				// 		addressResult: addressResult,
+				// 		address: address,
+				// 		timeResult: timeResult,
+				// 		cardResult: cardResult
+				// 	} ,/*传递参数*/
+				// 	
+				// } );
+				mui.alert('您的预约申请已经提交成功，48小时内会有专属客户经理联系您确认上门安装事宜。', '预约成功', function() {
+					// $('#phone').focus();
+					// $('#addressResult').focus();
 				});
+				return false;
 			}
 
 		});
