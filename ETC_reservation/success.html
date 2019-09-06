@@ -6,6 +6,16 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="css/mui.css" rel="stylesheet" />
+		<style>
+			#success{
+		    position: fixed;
+		    top: -400px;
+		    left: 0px;
+		    right: 0px;
+		    bottom: 0px;
+		    margin: auto;
+		}
+		</style>
 	</head>
 
 	<body>
@@ -13,11 +23,13 @@
 		<script type="text/javascript">
 			mui.init()
 		</script>
-		<div class="mui-input-row">
-			<label>您的预约申请已经提交成功，稍后会有工作人员联系您。</label>
-			<input type="" placeholder="预约成功">
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">预约成功</h1>
+		</header>
+		<div class="mui-center mui-bar" id="success">
+			<h4 >您的预约申请已经提交成功，稍后会有工作人员联系您。</h4>
 		</div>
-		
+
 	</body>
 
 </html>

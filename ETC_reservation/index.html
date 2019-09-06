@@ -3,7 +3,12 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title></title>
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title>建行ECT（南宁城区）上门安装预约</title>
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="css/mui.min.css">
 		<script src="js/mui.min.js"></script>
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="css/mui.picker.min.css" />
@@ -13,111 +18,186 @@
 			});
 		</script>
 		<style>
-
+			#label_address{
+				font-family: 'Helvetica Neue', Helvetica, sans-serif;
+				line-height: 1.1;
+				float: left;
+				width: 40%;
+				padding: 11px 15px
+			}
+			#address{
+				float: right;
+				width: 60%;
+				margin-bottom: 0;
+				padding-left: 0;
+				border: 0
+			}
+			#label_time{
+				font-family: 'Helvetica Neue', Helvetica, sans-serif;
+				line-height: 1.1;
+				float: left;
+				width: 60%;
+				padding: 11px 15px
+			}
+		#timeResult{
+			float: right;
+			width: 40%;
+			margin-bottom: 0;
+			padding-left:13em;
+			border: 0
+		}
+			#label_card{
+				font-family: 'Helvetica Neue', Helvetica, sans-serif;
+				line-height: 1.1;
+				float: left;
+				width: 60%;
+				padding: 11px 15px
+			}
+			#cardResult{
+				float: right;
+				width: 40%;
+				margin-bottom: 0;
+				padding-left:250px;
+				border: 0
+			}
 		</style>
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<h1 class="mui-title">建行ECT（南宁城区）上门安装预约</h1>
 		</header>
-
-		<form class="mui-input-group">
-			<div class="mui-input-row">
-			</div>
-			<div class="mui-input-row">
-			</div>
-			<!-- 1.手机号码： -->
-			<div class="mui-input-row">
-
-				<label>手机号码：</label>
-				<input type="text" class="mui-input-clear" placeholder="请输入手机号码" oncellchange="checkPhone()">
-			</div>
-			<!-- 2.所属城区： -->
-			<div class="mui-input-row">
-				<label>所属城区：</label>
-				<!-- <input type="text" class="mui-input-clear" placeholder="请输入城区"> -->
-				<h2 class="mui-center mui-title" id='addressResult'>请选择所属城区</h2>
-				<button id='showAddressPicker' class="mui-btn mui-btn-block" type='button'>选择城区</button>
-			</div>
-			<!-- 3.上门安装地址： -->
-			<div class="mui-input-row">
-				<label>上门安装地址：</label>
-				<input type="text" class="mui-input-clear" placeholder="请输入地址">
-			</div>
-			<!-- 4.希望上门日期： -->
-			<div class="mui-input-row">
-				<label>希望上门安装时间：</label>
-				<!-- <input type="text" class="mui-input-clear" placeholder="请选择时间"> -->
-				<h2 class="mui-center mui-title" id='result'>请选择时间段</h2>
-					<button type="button" id='demo7' data-options='{"type":"hour","customData":{"h":[{"text":"上午","value":"上午"},{"text":"下午","value":"下午"},{"text":"晚上","value":"晚上"}]},"labels":["年", "月", "日", "时段", "分"]}'
-					 class="btn mui-btn mui-btn-block">选择时段</button>
-			</div>
-			<!-- 5.是否已有建行卡： -->
-			<div class="mui-input-row">
-				<label>是否已有建行卡：</label>
-				<!-- <input type="text" class="mui-input-clear" placeholder="是否已有建行卡"> -->
-				<div class="mui-switch mui-switch-mini">
-					<div class="mui-switch-handle">
-					</div>
+		<div class="contention">
+			<form class="mui-input-group">
+				<!-- 1.手机号码： -->
+				<div class="mui-input-row">
+					<label>手机号码：</label>
+					<input type="number" pattern="\d*" class="mui-input-clear phone_input" id="phone" placeholder="请输入手机号码"
+					 oncellchange="checkPhone()">
 				</div>
-			</div>
+				<!-- 2.所属城区： -->
+				<div class="mui-input-row">
+					<label>所属城区：</label>
+					<!-- <input type="text" class="mui-input-clear" placeholder="请输入城区"> -->
+					<a id='showAddressPicker'>
+						<h2 class="mui-center mui-title addressResult_input" id='addressResult'>
+							点击选择城区
+						</h2>
+					</a>
+					<!-- <button id='showAddressPicker' class="mui-btn mui-btn-block" type='button'>选择城区</button> -->
+				</div>
+				<!-- 3.上门安装地址： -->
+				<div class="mui-input-row">
+					<label id="label_address">上门安装地址：</label>
+					<input type="text" class="mui-input-clear" id="address" placeholder="请输入地址">
+				</div>
+				<!-- 4.希望上门日期： -->
+				<div class="mui-input-row">
+					<label id="label_time">希望上门安装时间：</label>
+					<!-- <input type="text" class="mui-input-clear" placeholder="请选择时间"> -->
+					<a id='demo7' data-options='{"type":"hour","customData":{"h":[{"text":"上午","value":"上午"},{"text":"下午","value":"下午"},{"text":"晚上","value":"晚上"}]},"labels":["年", "月", "日", "时段", "分"]}'
+					 class="btn">
+						<h2 class="mui-center mui-title" id='timeResult'>
+							点击选择时间
+						</h2>
+					</a>
+					<!-- <button type="button" id='demo7' data-options='{"type":"hour","customData":{"h":[{"text":"上午","value":"上午"},{"text":"下午","value":"下午"},{"text":"晚上","value":"晚上"}]},"labels":["年", "月", "日", "时段", "分"]}'
+					 class="btn mui-btn mui-btn-block">选择时段</button> -->
+				</div>
+				<!-- 5.是否已有建行卡： -->
+				<div class="mui-input-row">
+					<label id="label_card">是否已有建行卡：</label>
+					<!-- <input href="#sheet1" type="text" class="mui-input-clear" placeholder="请选择"> -->
+					<a id='showCardPicker'>
+						<h2 class="mui-center mui-title" id='cardResult'>点击选择
+						</h2>
+					</a>
+					<!-- <button id='showCardPicker' class="mui-btn mui-btn-block" type='button'>点击选择</button> -->
 
-			<!-- 6.备注：提交预约信息后，48小时内会有专属客户经理联系您确认上门安装事宜。 -->
-			<div class="mui-text-center">
-				备注：提交预约信息后，48小时内会有专属客户经理联系您确认上门安装事宜。
-			</div>
-			<div class="mui-button-row">
-				<button type="button" class="mui-btn mui-btn-primary" onclick="Submit()" id="sub">提交</button>
-				<button type="button" class="mui-btn mui-btn-danger" onclick="Cancel()">取消</button>
-			</div>
-			<div id='result' class="ui-alert"></div>
-		</form>
+				</div>
+
+				<!-- 6.备注：提交预约信息后，48小时内会有专属客户经理联系您确认上门安装事宜。 -->
+				<div class="mui-text-center">
+					备注：提交预约信息后，48小时内会有专属客户经理联系您确认上门安装事宜。
+				</div>
+				<div class="mui-button-row">
+					<button type="button" class="mui-btn mui-btn-primary" id="sub">提交</button>
+					<button type="button" class="mui-btn mui-btn-danger" onclick="Cancel()">取消</button>
+				</div>
+			</form>
+		</div>
+
 	</body>
+	<!-- 判断是否全部填写完才能跳转 -->
+	<!-- 2019-09-06 星期五 11:25:38 -->
+	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript">
 		// 点击"提交"按钮
-		function Submit() {
-			var check = true;
-			mui(".mui-input-group input").each(function() {
-				//若当前input为空，则alert提醒
-				if (!this.value || trim(this.value) == "") {
-					var label = this.previousElementSibling;
-					mui.alert(label.innerText + "不允许为空");
-					check = false;
-					return false;
-				}
-			});
-			//校验通过，继续执行业务逻辑
-			if (check) {
+		// 		function Submit() {
+		// 			var check = true;
+		// 			mui(".mui-input-group input").each(function() {
+		// 				//若当前input为空，则alert提醒
+		// 				if (!this.value || trim(this.value) == "") {
+		// 					var label = this.previousElementSibling;
+		// 					mui.alert(label.innerText + "不允许为空");
+		// 					check = false;
+		// 					return false;
+		// 				}
+		// 			});
+		// 			//校验通过，继续执行业务逻辑
+		// 			if (check) {
+		// 				mui.openWindow({
+		// 					url: "success.html",
+		// 					id: "success.html",
+		// 					extras: {
+		// 						name: '小明',
+		// 						age: 18
+		// 					} /*传递参数*/
+		// 				});
+		// 			}
+		// 
+		// 		};
+
+		// 校验手机号
+		document.getElementById("sub").addEventListener('tap', function() {
+			var phone = $('#phone').val();
+			var addressResult = $('#addressResult')[0].innerText;
+			var address = $('#address').val();
+			var timeResult = $('#timeResult')[0].innerText;
+			var cardResult = $('#cardResult')[0].innerText;
+			console.log(phone);
+			console.log(addressResult);
+			console.log(address);
+			console.log(timeResult);
+			console.log(cardResult);
+
+			var phone_pattern = /^1[3|4|5|7|8][0-9]{9}$/;
+			if (!phone_pattern.test(phone)) {
+				mui.alert('请输入正确的手机号', '系统提示', function() {
+					$('#phone').focus();
+				});
+				return false;
+			} else if (phone == '' || addressResult == '' || address == '' || timeResult == '' || cardResult == '') {
+				mui.alert('请输入完整信息', '系统提示', function() {
+					$('#phone').focus();
+					$('#addressResult').focus();
+				});
+				return false;
+			} else {
+				alert("转到下一个页面");
 				mui.openWindow({
 					url: "success.html",
 					id: "success.html",
 					extras: {
-						name: '小明',
-						age: 18
+						phone: phone,
+						addressResult: addressResult,
+						address: address,
+						timeResult: timeResult,
+						cardResult: cardResult
 					} /*传递参数*/
 				});
 			}
 
-		};
-
-		//判断手机号码
-		// var check = true;
-		// mui(".mui-input-group input").each(function() {
-		// 	//若当前input为空，则alert提醒
-		// 	if (!this.value || trim(this.value) == "") {
-		// 		var label = this.previousElementSibling;
-		// 		mui.alert(label.innerText + "不允许为空");
-		// 		check = false;
-		// 		return false;
-		// 	}
-		// });
-		// //校验通过，继续执行业务逻辑
-		// if (check) {
-		// 	mui.openWindow({
-		// 		url: "success.html",
-		// 		id: "success.html"
-		// 	})
-		// }
+		});
 	</script>
 	<!-- 时间选择器start -->
 	<script src="js/mui.min.js"></script>
@@ -133,8 +213,9 @@
 					if (_self.picker) {
 						_self.picker.show(function(rs) {
 							// result.innerText = '选择结果: ' + rs.text;
-							result.innerText = rs.text;
-							_self.picker.dispose();
+							timeResult.innerText = rs.text;
+							console.log(rs.text);
+							// _self.picker.dispose();
 							_self.picker = null;
 						});
 					} else {
@@ -158,18 +239,19 @@
 							 * rs.i 分（minutes 的第二个字母），用法同年
 							 */
 							// result.innerText = '选择结果: ' + rs.text;
-							result.innerText = rs.text;
+							timeResult.innerText = rs.text;
+							console.log(rs.text);
 							/* 
 							 * 返回 false 可以阻止选择框的关闭
 							 * return false;
 							 */
 							/*
 							 * 释放组件资源，释放后将将不能再操作组件
-							 * 通常情况下，不需要示放组件，new DtPicker(options) 后，可以一直使用。
+							 * 通常情况下，不需要释放组件，new DtPicker(options) 后，可以一直使用。
 							 * 当前示例，因为内容较多，如不进行资原释放，在某些设备上会较慢。
 							 * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
 							 */
-							_self.picker.dispose();
+							// _self.picker.dispose();
 							_self.picker = null;
 						});
 					}
@@ -179,6 +261,7 @@
 		})(mui);
 	</script>
 	<!-- 时间选择器end -->
+
 	<!-- 选择城区start -->
 	<script>
 		(function($, doc) {
@@ -222,7 +305,8 @@
 				showAddressPickerButton.addEventListener('tap', function(event) {
 					addressPicker.show(function(items) {
 						// addressResult.innerText = JSON.stringify(items[0]);
-						addressResult.innerText=JSON.parse(JSON.stringify(items[0].text));
+						addressResult.innerText = JSON.parse(JSON.stringify(items[0].text));
+						console.log(JSON.parse(JSON.stringify(items[0].text)));
 						//返回 false 可以阻止选择框的关闭
 						//return false;
 					});
@@ -231,4 +315,43 @@
 		})(mui, document);
 	</script>
 	<!-- 选择城区end -->
+	<!-- 选择“是否有建行卡”start -->
+	<!-- 2019-09-06 星期五 11:23:13 -->
+	<script>
+		(function($, doc) {
+			$.init();
+			$.ready(function() {
+				/**
+				 * 获取对象属性的值
+				 * 主要用于过滤三级联动中，可能出现的最低级的数据不存在的情况，实际开发中需要注意这一点；
+				 * @param {Object} obj 对象
+				 * @param {String} param 属性名
+				 */
+				var _getParam = function(obj, param) {
+					return obj[param] || '';
+				};
+				//普通示例
+				var cardPicker = new $.PopPicker();
+				cardPicker.setData([{
+					value: 'yes',
+					text: '已经有建行卡'
+				}, {
+					value: 'no',
+					text: '还没有建行卡'
+				}]);
+				var showCardPickerButton = doc.getElementById('showCardPicker');
+				var cardResult = doc.getElementById('cardResult');
+				showCardPickerButton.addEventListener('tap', function(event) {
+					cardPicker.show(function(items) {
+						// addressResult.innerText = JSON.stringify(items[0]);
+						cardResult.innerText = JSON.parse(JSON.stringify(items[0].text));
+						console.log(JSON.parse(JSON.stringify(items[0].text)));
+						//返回 false 可以阻止选择框的关闭
+						//return false;
+					});
+				}, false);
+			});
+		})(mui, document);
+	</script>
+	<!-- 下拉选项end -->
 </html>
